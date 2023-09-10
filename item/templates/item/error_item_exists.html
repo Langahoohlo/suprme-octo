@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error - Item Exists</title>
+</head>
+<body>
+    <h1>Error - You already have a listing</h1>
+    <p>Sorry, you cannot have more than one listing at a time consider editing your listing or deleting your listing</p>
+    <p>Your listing details:</p>
+    <ul>
+        <a href="{% url 'dashboard:index' %}">Edit profile here or delete profile</a><br>
+        <a href="/">Home</a><br>
+        <!-- Add more item details as needed -->
+    </ul>
+</body>
+</html>

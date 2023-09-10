@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ user.username }}'s Media Gallery</h1>
+
+{% if mymedia %}
+<div class="media-container">
+    {% for media_item in mymedia %}
+        <!-- Display media items (images and videos) here as you did before -->
+    {% endfor %}
+</div>
+{% else %}
+<p>No uploads available.</p>
+{% endif %}
+
+{% endblock %}

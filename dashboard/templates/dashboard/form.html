@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<style>
+    @media (min-width: 768px) {
+        .margins {
+           margin-left: 40px;
+           margin-right: 40px;
+        }
+    }
+
+</style>
+
+<!--<h1 class="mb-6 text-3xl">{{ title }}</h1>-->
+<h1 class="mb-6 text-3xl">Media Profile</h1>
+
+<form method="post" action="." enctype="multipart/form-data" class="margins" onsubmit="return validateForm();">
+    {% csrf_token %}
+
+    <div class="space-y-4">
+        {{ form.as_p }}
+    </div>
+
+    {% if form.errors or form.non_field_errors %}
+        <div class="mb-3 p-6 bg-red-100 rounded-xl">
+            {% for field in form %}
+                {{ field.errors }}
+            {% endfor %}
+
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <button class="mt-6 py-4 px-8 text-lg bg-red-100 hover:bg-red-300 rounded-xl text-red">Submit</button>
+</form>
+
+<h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-center mb-8">My Media Gallery</h1>
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+     {% if user_media %}
+     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
+         {% for media_item in user_media %}
+             {% if media_item.image %}
+             <div class="bg-gray-200 rounded-lg overflow-hidden aspect-w-1 aspect-h-1">
+                 <img src="{{ media_item.image.url }}" alt="{{ media_item.image.name }}" class="object-cover w-full h-full group-hover:opacity-75 group block">
+             </div>
+             {% endif %}
+
+             {% if media_item.video %}
+             <div class="bg-gray-200 rounded-lg overflow-hidden aspect-w-1 aspect-h-1">
+                 <video controls class="object-cover w-full h-full group-hover:opacity-75 group block">
+                     <source src="{{ media_item.video.url }}" type="video/mp4">
+                     Your browser does not support the video tag.
+                 </video>
+             </div>
+             {% endif %}
+         {% endfor %}
+     </div>
+     {% else %}
+     <p class="text-center mt-4">No media files available for {{ user.username }}.</p>
+     {% endif %}
+
+{% endblock %}

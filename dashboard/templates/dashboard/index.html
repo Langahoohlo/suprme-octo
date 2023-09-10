@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    a.group {
+    text-decoration: none; /* Remove underlines for the link */
+}
+
+a.group:hover {
+    text-decoration: none; /* Remove underlines for the link on hover */
+    color: grey;
+}
+</style>
+
+ <div class="mt-6 px-6 py-12 bg-black-100 rounded-xl">
+     {% if not items %}
+     <div class="flex justify-center">
+    <h2>
+        <button  class="mt-6 py-4 px-8 text-lg bg-red-100 hover:bg-red-300 rounded-xl text-red">
+            <a href="{% url 'item:new' %}" class="text-red group block">Upload Profile</a>
+        </button>
+    </h2>
+</div>
+    {% else %}
+     <h2 class="mb-12 text-2xl text-center">My Account</h2>
+     {% endif %}
+
+     <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        {% for item in items %}
+        <a href="{% url 'item:detail' item.id %}" class="group block border border-white rounded-lg">
+            <div class="rounded-lg shadow-md"> <!-- Add background color here -->
+                <div class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-t-lg overflow-hidden image-box">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"
+                        class="object-contain h-full w-full group-hover:opacity-75">
+                </div>
+    
+                <h3 style="margin-bottom: 15px;">{{ item.name }}</h3>
+                
+                <p>
+                    <p class="truncate-text">{{ item.description }}</p>
+                    <script>
+                        var descriptionElements = document.querySelectorAll('.truncate-text');
+                        descriptionElements.forEach(function (element) {
+                            var maxWords = 15;
+                            var words = element.textContent.split(' ');
+    
+                            if (words.length > maxWords) {
+                                var truncatedText = words.slice(0, maxWords).join(' ') + '...';
+                                element.textContent = truncatedText;
+                            }
+                        });
+                    </script>
+                </p>
+                <p>Area: {{ item.area }}</p>
+                {% if item.is_verified %}
+                <p>Active: <span style="color: green; font-size: 18px; margin-left: 4px;">&#9679;</span></p>
+                {% else %}
+                <p></p>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

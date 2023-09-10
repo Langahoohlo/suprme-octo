@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    a.group {
+    text-decoration: none; /* Remove underlines for the link */
+}
+
+a.group:hover {
+    text-decoration: none; /* Remove underlines for the link on hover */
+    color: grey;
+}
+/* Style for the image box */
+
+.button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF; /* Choose your desired background color */
+        color: #fff; /* Text color */
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600; /* Adjust font weight as needed */
+        transition: color 0.3s, background-color 0.3s; /* Add a smooth transition effect */
+    }
+
+    .button:hover {
+        background-color: #0056b3; /* Change the background color on hover */
+        color: #fff; /* Change text color on hover */
+    }
+
+</style>
+
+
+
+<h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-center mb-8">{{ user.username }}</h1>
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+
+     {% if user_media %}
+     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
+         {% for media_item in user_media %}
+         {% if media_item.image %}
+         <div class="media-container relative">
+             <div class="bg-gray-200 rounded-lg overflow-hidden aspect-w-1 aspect-h-1">
+                 <img src="{{ media_item.image.url }}" alt="{{ media_item.image.name }}" class="object-cover w-full h-full group-hover:opacity-75 group block">
+             </div>
+             <form action="{% url 'dashboard:delete_media' media_item.id %}" method="post" class="absolute top-2 right-2">
+                 {% csrf_token %}
+                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded">
+                     Delete
+                 </button>
+             </form>
+         </div>
+         {% endif %}
+         
+         {% if media_item.video %}
+         <div class="media-container relative">
+             <div class="bg-gray-200 rounded-lg overflow-hidden aspect-w-1 aspect-h-1">
+                 <video controls class="object-cover w-full h-full group-hover:opacity-75 group block">
+                     <source src="{{ media_item.video.url }}" type="video/mp4">
+                     Your browser does not support the video tag.
+                 </video>
+             </div>
+             <form action="{% url 'dashboard:delete_media' media_item.id %}" method="post" class="absolute top-2 right-2">
+                 {% csrf_token %}
+                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded">
+                     Delete
+                 </button>
+             </form>
+         </div>
+         {% endif %}
+         
+         {% endfor %}
+     </div>
+     {% else %}
+     <p class="text-center mt-4">No media files available.</p>
+     {% endif %}
+     
+ </div>
+
+
+
+
+
+
+
+
+    <!-- Dark Mode Toggle Button -->
+    <!-- <button onclick="toggleDarkMode()" class="fixed bottom-4 right-4 px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+        Toggle Dark Mode
+    </button> -->
+
+    <script>
+        // JavaScript to toggle dark mode
+        function toggleDarkMode() {
+            const html = document.querySelector('html');
+            html.classList.toggle('dark');
+        }
+    </script>
+
+{% endblock %}

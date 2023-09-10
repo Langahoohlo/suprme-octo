@@ -1,0 +1,21 @@
+/* Custom styles for dark mode */
+body {
+    background-color: #1a202c;
+}
+
+.dark-mode {
+    background-color: #1a202c;
+    color: #ff0000; /* Red font color */
+}
+
+/* Styles for navigation menu links */
+.dark-mode nav a {
+    color: #ff0000;
+}
+
+/* Styles for footer links */
+.dark-mode footer a {
+    color: #ff0000;
+}
+
+/* Additional styles for specific elements can be added as needed */

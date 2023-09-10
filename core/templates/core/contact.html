@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="left-column">
+      <!-- Left column content -->
+    </div>
+    <div class="middle-column">
+      <div class="contact" style="text-align: center;">
+        <h1>Contact Page</h1>
+
+        <form method="post">
+            {% csrf_token %}
+           <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 10px;">
+                    <label for="name">Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w-full sm:w-1/1 my-6 mx-auto p-6 bg-gray-100 rounded-xl" type="text" id="name" name="name" required>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 10px;">
+                    <label for="email">Email:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w-full sm:w-1/1 my-6 mx-auto p-6 bg-gray-100 rounded-xl" type="email" id="email" name="email"  required>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 10px;">
+                    <label for="message">Message:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <textarea class="w-20px sm:w-1/1 my-6 mx-auto p-9 bg-gray-100 rounded-xl" id="message" name="message" required></textarea>
+                </div>
+
+            <button style="margin-bottom: 10px" type="submit" class="mt-6 py-4 px-8 text-lg bg-red-100 hover:bg-red-300 rounded-xl text-red">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="right-column">
+      <!-- Right column content -->
+    </div>
+  </div>
+{% endblock %}

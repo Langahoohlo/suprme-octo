@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0000; /* Choose your desired background color */
+        color: #fff; /* Text color */
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <h1 class="mb-6 text-3xl">Sign up</h1>
+
+  <form method="post" enctype="multipart/form-data" id="signup-form">
+    {% csrf_token %}
+
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+
+    <div class="mb-3">
+      <label class="block mb-2">Username</label>
+      {{ form.username }}
+    </div>
+
+    <div class="mb-3">
+      <label class="block mb-2" obscure>Password</label>
+      {{ form.password1 }}
+    </div>
+
+    <div class="mb-3">
+      <label class="block mb-2">Repeat password</label>
+      {{ form.password2 }}
+    </div>
+
+    <p></p>
+
+    <div class="form-group">
+      <label for="{{ form.is_verified.id_for_label }}"></label>
+      <div class="form-check">
+        {{ form.is_verified }}
+        <label class="form-check-label" for="{{ form.is_verified.id_for_label }}">Check this box to accept our terms of use</label>
+        <a href="{% url 'core:terms_of_use' %}" class="button">Read our terms here</a>
+        <p>Stictly be above the age of 21</p>
+      </div>
+    </div>
+
+    {% if form.errors or form.non_field_errors %}
+    <div class="mb-3 p-6 bg-red-100 rounded-xl">
+      {% for field in form %}
+      {{ field.errors }}
+      {% endfor %}
+
+      {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+
+    <button class="w-full py-4 mt-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+  </form>
+</div>
+
+<script>
+  // Image preview functionality
+  const profilePictureInput = document.getElementById('id_profile_picture');
+  const profilePicturePreview = document.getElementById('profile-picture-preview');
+
+  profilePictureInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', (event) => {
+        profilePicturePreview.src = event.target.result;
+        profilePicturePreview.style.display = 'block';
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      profilePicturePreview.src = '#';
+      profilePicturePreview.style.display = 'none';
+    }
+  });
+</script>
+{% endblock %}

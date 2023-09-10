@@ -1,0 +1,151 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+<style>
+            /* Custom styles for dark mode */
+
+
+#items{
+    background-color: #1a202c;
+    color: #ff0000; /* Red font color */
+}
+
+/* Styles for navigation menu links */
+#filter {
+   padding: 5%;
+
+    background-color: grey;
+}
+
+/* Styles for footer links */
+.categories {
+    color: black;
+}
+
+
+/* Additional styles for specific elements can be added as needed */
+/* For desktop */
+@media (min-width: 768px) {
+    .spacing {
+        margin-left: 5px; /* Adjust as needed */
+    }
+}
+
+/* For mobile */
+a.group {
+    text-decoration: none; /* Remove underlines for the link */
+}
+
+a.group:hover {
+    text-decoration: none; /* Remove underlines for the link on hover */
+    color: grey;
+}
+
+/* Style for the image box */
+.image-box {
+    width: 500px; /* Set the width you want */
+    height: 500px; /* Set the height you want */
+    border: 1px solid #ccc;
+    overflow: hidden; /* Hide overflowing content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the image inside the box */
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Scale the image to cover the entire box */
+}
+
+.item-container {
+        height: 125px; /* Set your desired fixed height */
+        overflow: hidden;
+    }
+    .truncate-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Adjust the number of lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        }
+
+
+
+
+</style>
+
+    <div >
+        <h1>Items</h1>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-1 ">
+
+            <!-- Filters Section (Left Column) -->
+            <div class="w-full rounded-t-lg rounded-b-lg md:col-span-1" id="filter" >
+                <form method="get" action="{% url 'item:items' %}" class="mb-6">
+                    <input name="query" class="w-full py-2 px-4 border rounded-lg" type="text" value="{{ query }}" placeholder="Search name...">
+
+                    <button class="mt-2 py-2 px-6 text-sm bg-teal-500 text-white rounded-lg">Search</button>
+                </form>
+
+
+
+                <!-- Categories -->
+                <div class="categories">
+                <p class="font-semibold" >Categories</p>
+                <ul class="mb-6">
+                    {% for category in categories %}
+                        <li class="py-1 px-1 rounded-lg{% if category.id == category_id %} bg-gray-200{% endif %}">
+                            <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}" class="group block" >{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Clear Filters -->
+                <p class="font-semibold" >Clear filters</p>
+                <ul>
+                    <li><a href="{% url 'item:items' %}" class="mt-2 py-2 px-6 inline-block bg-yellow-500 text-sm rounded-lg text-white group block">Clear</a></li>
+                </ul>
+                    </div>
+
+            </div>
+
+
+            <!-- Items Section (Right Column) -->
+
+            <div class="rounded-b-lg md:col-span-3 spacing" id="items" >
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {% for item in items %}
+                        <div class="mb-6 md:mb-0 ">
+                            <a href="{% url 'item:detail' item.id %}" class="group block ">
+                                <div>
+                                    <img src="{{ item.image.url }}" class="w-full rounded-t-lg  image-box">
+                                </div>
+
+                                <div class="p-4 bg-white rounded-b-lg item-container">
+                                <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+                                <p class="text-gray-500 truncate-text">{{ item.description }}</p>
+                            </div>
+
+                            <script>
+                                var descriptionElements = document.querySelectorAll('.truncate-text');
+                                descriptionElements.forEach(function(element) {
+                                    var maxWords = 15;
+                                    var words = element.textContent.split(' ');
+
+                                    if (words.length > maxWords) {
+                                        var truncatedText = words.slice(0, maxWords).join(' ') + '...';
+                                        element.textContent = truncatedText;
+                                    }
+                                });
+                            </script>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

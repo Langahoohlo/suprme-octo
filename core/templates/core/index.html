@@ -1,0 +1,186 @@
+{% extends 'core/base.html' %}
+
+{% load custom_filters %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<style>
+    /* Custom styles for dark mode */
+
+
+    .dark-mode #dark-mode {
+        background-color: #1a202c;
+        color: #ff0000;
+        /* Red font color */
+    }
+
+    /* Styles for navigation menu links */
+    .names {
+        color: #ff0000;
+    }
+
+    .names:hover {
+
+        color: grey;
+    }
+
+    /* Styles for footer links */
+
+
+    /* Additional styles for specific elements can be added as needed */
+
+
+    #dark-mode {
+        /* background-image: url('https://cdni.pornpics.com/1280/7/229/90952439/90952439_043_d642.jpg'); */
+        background-color: #ccc;
+        background-size: cover;
+        /* Adjust background size as needed */
+        background-position: center center;
+        /* Adjust background position as needed */
+    }
+
+    /* Add this CSS to your stylesheet */
+    a.group {
+        text-decoration: none;
+        /* Remove underlines for the link */
+    }
+
+    a.group:hover {
+        text-decoration: none;
+        /* Remove underlines for the link on hover */
+        color: grey;
+    }
+
+    /* Reset default margin and padding for the whole page */
+    body,
+    div,
+    img {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Style for the image box */
+    .image-box {
+        width: 100%;
+        /* Set the width you want */
+        height: 350px;
+        /* Set the height you want */
+        border: 1px solid #ccc;
+        overflow: hidden;
+        /* Hide overflowing content */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Style for the image inside the box */
+    .image-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        /* Scale the image to cover the entire box */
+    }
+
+    .truncate-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* Adjust the number of lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .item-container {
+        height: 125px;
+        /* Set your desired fixed height */
+        overflow: hidden;
+    }
+
+    .truncate-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* Adjust the number of lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+
+
+<div class="dark-mode">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 class="sr-only">Products</h2>
+    
+        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            {% for item in items %}
+            <a href="{% url 'item:detail' item.id %}" style="background-color: white;" class="group block border border-white rounded-lg">
+                <div class="rounded-lg shadow-md"> <!-- Add background color here -->
+                    <div class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-t-lg overflow-hidden image-box">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}"
+                            class="object-contain h-full w-full group-hover:opacity-75">
+                    </div>
+        
+                    <h3 style="margin-bottom: 15px;">{{ item.name }}</h3>
+                    
+                    <p>
+                        <p class="truncate-text">{{ item.description }}</p>
+                        <script>
+                            var descriptionElements = document.querySelectorAll('.truncate-text');
+                            descriptionElements.forEach(function (element) {
+                                var maxWords = 15;
+                                var words = element.textContent.split(' ');
+        
+                                if (words.length > maxWords) {
+                                    var truncatedText = words.slice(0, maxWords).join(' ') + '...';
+                                    element.textContent = truncatedText;
+                                }
+                            });
+                        </script>
+                    </p>
+                    <p>Area: {{ item.area }}</p>
+                    {% if item.is_verified %}
+                    <p>Active: <span style="color: green; font-size: 18px; margin-left: 4px;">&#9679;</span></p>
+                    {% else %}
+                    <p></p>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="mt-6 px-4 py-8 md:px-8 bg-gray-100 rounded-xl" id="dark-mode">
+    <h2 class="mb-6 text-xl md:text-2xl text-center">Categories</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for category in categories %}
+        <div class="mb-4">
+            <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}" class="group block">
+                <div class="p-4 bg-white rounded-lg ">
+                    <h2 class="names">{{ category.name }}</h2>
+                    <p class="names">{{ category.items.count }} items</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- <div class="mb-6" >
+    <label class="block font-semibold mb-2">City</label>
+    <div class="flex flex-wrap gap-2">
+        {% for item in items %}
+            <a href="{% url 'item:items' %}?query={{ query }}&category={{ category_id }}&city={{ choice }}"
+               class="py-2 px-4 rounded-lg bg-gray-200 hover:bg-gray-300 group block">{{ item.city }}</a>
+               
+        {% endfor %}
+    </div>
+</div> -->
+
+
+{% endblock %}
