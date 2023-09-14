@@ -32,6 +32,10 @@ jobs:
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
+      - name: Create Django Migrations
+        run: |
+          python manage.py makemigrations
+
       - name: Apply Django Migrations
         run: |
           python manage.py migrate
