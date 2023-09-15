@@ -40,7 +40,7 @@ EMAIL_HOST_PASSWORD = 'epgfvqnancgeulgi'
 
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','malutimingle.azurewebsites.net']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
