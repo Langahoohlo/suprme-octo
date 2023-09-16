@@ -47,8 +47,8 @@ a.group:hover {
                 <p>This is your display profile!</p>
 <br>
                 <a href="{% url 'item:edit' item.id %}" class=" mt-6 px-6 py-3 text-lg font-semibold bg-teal-400  hover:bg-teal-200 text-white rounded-xl">Edit</a>
-                <a href="{% url 'dashboard:dashboardv2' %}" style="margin-top: 5px;" class="mt-6 py-3 px-6 text-lg bg-indigo-100 hover:bg-teal-200 rounded-xl text-red">Upload</a><br><br><br>
-                <a href="{% url 'item:delete' item.id %}" class="mt-6 py-3 px-6 text-lg bg-red-100 hover:bg-red-300 rounded-xl text-red">Delete</a>
+                <!-- <a href="{% url 'dashboard:dashboardv2' %}" style="margin-top: 5px;" class="mt-6 py-3 px-6 text-lg bg-indigo-100 hover:bg-teal-200 rounded-xl text-red">Upload</a><br><br><br> -->
+                <a href="{% url 'item:delete' item.id %}" class="mt-6 py-3 px-6 text-lg bg-red-100 hover:bg-red-300 rounded-xl text-red">Delete Your Listing</a>
                 <br>
 
             </div>
@@ -78,7 +78,7 @@ a.group:hover {
            <!-- <a href="{% url 'conversation:new' item.id %}" class="group block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Photos and Videos</a> -->
         {% endif %}
         
-        <a href="{% url 'dashboard:myprofile' item.created_by_id %}" class="btn btn-danger">View media</a>
+        <!-- <a href="{% url 'dashboard:myprofile' item.created_by_id %}" class="btn btn-danger">View media</a> -->
         <!-- <a href="{% url 'dashboard:myprofile' %}" class="btn btn-primary">Go to My Uploads</a> -->
 
     </div>
