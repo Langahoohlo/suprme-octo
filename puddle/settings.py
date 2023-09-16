@@ -38,9 +38,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'langahoohlo@gmail.com'
 EMAIL_HOST_PASSWORD = 'epgfvqnancgeulgi'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://malutimingle.azurewebsites.net',
+]
 
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','malutimingle.azurewebsites.net']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
