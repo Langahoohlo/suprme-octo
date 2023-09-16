@@ -18,7 +18,6 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
 
     is_verified = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput())
-    termsAccepted = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput())
 
     class Meta:
         model = User
