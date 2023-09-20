@@ -65,7 +65,7 @@ a.group:hover {
         height: 125px; /* Set your desired fixed height */
         overflow: hidden;
     }
-    .truncate-text {
+.truncate-text {
         display: -webkit-box;
         -webkit-line-clamp: 3; /* Adjust the number of lines */
         -webkit-box-orient: vertical;
@@ -77,14 +77,13 @@ a.group:hover {
 
 </style>
 
-    <div >
-        <h1>Items</h1>
+    <div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-1 ">
 
             <!-- Filters Section (Left Column) -->
             <div class="w-full rounded-t-lg rounded-b-lg md:col-span-1" id="filter" >
                 <form method="get" action="{% url 'item:items' %}" class="mb-6">
-                    <input name="query" class="w-full py-2 px-4 border rounded-lg" type="text" value="{{ query }}" placeholder="Search name...">
+                    <input name="query" class="w-full py-2 px-4 border rounded-lg" type="text" value="{{ query }}" placeholder="Want someone more specific">
 
                     <button class="mt-2 py-2 px-6 text-sm bg-teal-500 text-white rounded-lg">Search</button>
                 </form>

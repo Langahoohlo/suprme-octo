@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 <div class="w-full sm:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl">Log in</h1>
 
@@ -31,7 +30,12 @@
             </div>
         {% endif %}
 
-        <button class="mb-3 p-6 bg-red-100 rounded-xl">Submit</button>
+        <button class="mb-3 p-6 bg-red-100 rounded-xl">Login</button>
     </form>
+    <h4>Dont have an account</h4>
+    <button class="mb-3 p-6 bg-green-100 rounded-xl">
+        <a href="{% url 'core:signup' %}">Sign up</a>
+    </button>
+    
 </div>
 {% endblock %}
