@@ -21,7 +21,7 @@ def items(request):
         items = items.filter(category_id=category_id)
 
     if query:
-        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(area__icontains=query) | Q(city__icontains=query))
 
     if city:
         items = items.filter(city=city)  # Filter by selected city

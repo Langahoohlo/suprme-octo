@@ -30,13 +30,16 @@ class Item(models.Model):
         ('Maseru', 'Maseru'),
         ('Berea', 'Berea'),
         ('Hlotse', 'Hlotse'),
+        ('Mafeteng', 'Mafeteng'),
+        ('Mokhotlong', 'Mokhotlong'),
+        ('Butha-Bothe', 'Butha-Bothe'),
         # Add more city choices as needed
     )
 
     category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    price = models.DateField(blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
     image = models.ImageField(upload_to='item_images', blank=True, null=True)
     is_sold = models.BooleanField(default=True)
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
@@ -44,7 +47,7 @@ class Item(models.Model):
     area = models.CharField(max_length=50)
     city = models.CharField(max_length=50, choices=CITY_CHOICES)
     is_verified = models.BooleanField(default=True)
-    phone = models.IntegerField(default='00266')
+    phone = models.IntegerField(null=True)
     
 
     def __str__(self):

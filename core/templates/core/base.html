@@ -35,7 +35,7 @@
             right: 0;
             background-color: #1a202c;
             /* Adjust the background color as needed */
-            z-index: 1000;
+            /* z-index: 1000; */
             /* Ensure the navbar is above other elements */
         }
 
@@ -71,35 +71,49 @@
 
         /* Bottom navigation bar styling */
         @media (max-width: 768px) {
+
             /* Styling for the bottom navigation bar */
-.bottom-navigation-bar {
-    background-color: #ffffff; /* Background color */
-    border-radius: 20px; /* Rounded edges */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Box shadow for a floating effect */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px; /* Add padding to the buttons for spacing */
-    position: fixed;
-    bottom: 10px; /* Adjust the distance from the bottom as needed */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    z-index: 100; /* Ensure it's above other content */
-    width: 90%; /* Increase or decrease the width as needed */
-}
+            .bottom-navigation-bar {
+                background-color: #ffffff;
+                /* Background color */
+                border-radius: 20px;
+                /* Rounded edges */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                /* Box shadow for a floating effect */
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px;
+                /* Add padding to the buttons for spacing */
+                position: fixed;
+                bottom: 10px;
+                /* Adjust the distance from the bottom as needed */
+                left: 50%;
+                /* Center horizontally */
+                transform: translateX(-50%);
+                /* Center horizontally */
+                z-index: 100;
+                /* Ensure it's above other content */
+                width: 90%;
+                /* Increase or decrease the width as needed */
+            }
 
-/* Styling for navigation items (icons) */
-.bottom-navigation-item {
-    text-decoration: none;
-    color: #333333; /* Text color */
-    font-size: 20px; /* Adjust the font size as needed */
-    padding: 5px 10px; /* Add padding to the buttons for spacing */
-}
+            /* Styling for navigation items (icons) */
+            .bottom-navigation-item {
+                text-decoration: none;
+                color: #333333;
+                /* Text color */
+                font-size: 20px;
+                /* Adjust the font size as needed */
+                padding: 5px 10px;
+                /* Add padding to the buttons for spacing */
+            }
 
-/* Style the active navigation item if needed */
-.bottom-navigation-item.active {
-    color: #007bff; /* Active item text color */
-}
+            /* Style the active navigation item if needed */
+            .bottom-navigation-item.active {
+                color: #007bff;
+                /* Active item text color */
+            }
 
         }
 
@@ -205,7 +219,7 @@
             <a href="{% url 'core:login' %}" class="text-lg font-semibold group block">Log in</a>
             {% endif %}
         </div>
-        
+
     </nav>
 
     <div class="bottom-navigation-bar">
@@ -221,7 +235,7 @@
         <a href="/logout/" class="bottom-navigation-item">
             <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
         </a>
-        
+
         <script>
             // const mobileMenuButton = document.getElementById('mobile-menu-button');
             const bottomNavigationBar = document.querySelector('.bottom-navigation-bar');
@@ -265,14 +279,15 @@
             <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
 
             <ul class="space-y-2">
-                <li><a href="{% url 'core:about' %}"
-                        class="text-lg text-teal-500 hover:text-teal-700 group block">About</a></li>
+                <li><a href="{% url 'core:terms_of_use' %}"
+                    class="text-lg text-teal-500 hover:text-teal-700 group block">Terms of use</a></li>
                 <li><a href="{% url 'core:contact' %}"
                         class="text-lg text-teal-500 hover:text-teal-700 group block">Contact</a></li>
                 <li><a href="{% url 'core:privacy_policy' %}"
                         class="text-lg text-teal-500 hover:text-teal-700 group block">Privacy policy</a></li>
-                <li><a href="{% url 'core:terms_of_use' %}"
-                        class="text-lg text-teal-500 hover:text-teal-700 group block">Term of use</a></li>
+                <li><a href="{% url 'core:about' %}"
+                        class="text-lg text-teal-500 hover:text-teal-700 group block">About</a></li>
+                
             </ul>
         </div>
 
