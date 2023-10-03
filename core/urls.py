@@ -16,4 +16,5 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('terms_of_use/', views.terms_of_use, name='terms_of_use'),
+    path('receive-sms/', views.receive_sms, name='receive_sms'),
 ]
