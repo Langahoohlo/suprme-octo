@@ -1,3 +1,4 @@
+from datetime import timezone
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
@@ -82,8 +83,21 @@ def logout_view(request):
     return redirect('/login/')
     # Replace 'home' with the URL name of your desired redirect page after logout
 
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
 
-@login_required
+@receiver(user_logged_in)
+def user_logged_in_handler(sender, request, user, **kwargs):
+    # Update a custom user status field to indicate the user is logged in
+    user.is_logged_in = True
+    user.save()
+
+@receiver(user_logged_out)
+def user_logged_out_handler(sender, request, user, **kwargs):
+    # Update the custom user status field to indicate the user is logged out
+    user.is_logged_in = False
+    user.save()
+
 def items(request):
     user = request.user
     user_item = Item.objects.filter(user=user, is_sold=False).first()
@@ -96,12 +110,22 @@ def items(request):
     if query:
         items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
-    last_login_timestamps = {}
+    # Create a dictionary to store user statuses
+    user_statuses = {}
 
     for item in items:
         item_creator = item.created_by
-        creator = User.objects.get(id=item.created_by_id)
-        last_login_timestamps[item.id] = creator.last_login
+
+        # Check if the item has a creator
+        if item_creator:
+            # Check if the user is currently logged in based on the custom is_logged_in field
+            if item_creator.is_logged_in:
+                user_statuses[item.id] = "online"
+            else:
+                user_statuses[item.id] = "offline"
+        else:
+            # Handle the case where the item has no creator (optional)
+            user_statuses[item.id] = "unknown"
     
     # Define the number of items to display per page
     items_per_page = 10  # Adjust this number as needed
@@ -130,9 +154,8 @@ def items(request):
         'categories': categories,
         'category_id': int(category_id),
         'selected_city': city,
-        'last_login_timestamps': last_login_timestamps,
+        'user_statuses': user_statuses,  # Pass user statuses to the template
     })
-
 
 
 

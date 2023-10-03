@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% load custom_filters %}
+{% load custom_filter %}
 
 {% block title %}Welcome{% endblock %}
 
@@ -144,6 +144,13 @@
                     {% else %}
                     <p></p>
                     {% endif %}
+
+                    <!-- Display user status -->
+                    {% if item.created_by.last_login %}
+            <p>Last Login: {{ item.created_by.last_login|date:"F d, Y H:i:s" }}</p>
+            {% else %}
+            <p>Last Login: N/A</p>
+            {% endif %}
                 </div>
             </a>
             {% endfor %}

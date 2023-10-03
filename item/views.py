@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 
 from django.conf import settings
 import os
@@ -9,6 +10,26 @@ from django.urls import NoReverseMatch
 
 from .forms import ItemVerificationForm, NewItemForm, EditItemForm
 from .models import Category, Item
+
+def verify_item(request, item_id):
+    # Retrieve the item you want to verify
+    item = get_object_or_404(Item, pk=item_id)
+
+    # Check if the item is not already verified
+    if not item.is_verified:
+        # Set is_verified to True and update verified_timestamp
+        item.is_verified = True
+        item.verified_timestamp = timezone.now()
+        item.save()
+        
+        # You can also perform other actions or render a response here
+        # For example, redirect to a success page or return a JSON response
+        # return render(request, 'success.html', {'item': item})
+        return render(request, 'Success', {'item': item})
+    else:
+        # The item is already verified, you can handle this case as needed
+        return render(request, 'already verified', {'item': item})
+        # return render(request, 'already_verified.html', {'item': item})
 
 def items(request):
     query = request.GET.get('query', '')

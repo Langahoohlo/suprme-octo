@@ -29,13 +29,13 @@
         /* Additional styles for specific elements can be added as needed */
 
         .fixed-navbar {
-            position: fixed;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
             background-color: #1a202c;
             /* Adjust the background color as needed */
-            /* z-index: 1000; */
+            z-index: 1000;
             /* Ensure the navbar is above other elements */
         }
 
@@ -52,7 +52,6 @@
 
         .bottom-navigation-bar {
             display: none;
-            /* Hide the navigation bar by default */
         }
 
         .bottom-navigation-item {
@@ -155,7 +154,7 @@
 
 <body class="dark-mode">
 
-    <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200 fixed-navbar">
+    <nav class="py-2 px-2 flex justify-between items-center border-b border-gray-200 fixed-navbar">
         <!-- <a href="/" class="text-xl font-semibold group block">MalutiMingle</a> -->
         <a href="/" class="logo-container">
             <div class="logo">MalutiMingle</div>

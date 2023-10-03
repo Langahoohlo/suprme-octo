@@ -9,10 +9,10 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('inbox/', include('conversation.urls')),
     path('admin/', admin.site.urls),
-
+     path('sms/', include('sms_receiver.urls')),
     path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
     path('static/<path:path>/', serve, {'document_root': settings.STATIC_ROOT}),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

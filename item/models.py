@@ -46,7 +46,8 @@ class Item(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     area = models.CharField(max_length=50)
     city = models.CharField(max_length=50, choices=CITY_CHOICES)
-    is_verified = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)
+    verified_timestamp = models.DateTimeField(null=True, blank=True)
     phone = models.IntegerField(null=True)
     
 
@@ -70,3 +71,22 @@ class Item(models.Model):
 #
 #     def __str__(self):
 #         return self.name
+
+from django.db import models
+from django.utils import timezone
+
+class PaywalledContent(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    expiration_time = models.DateTimeField()  # Set 24 hours from purchase
+
+class UserPurchase(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.ForeignKey(PaywalledContent, on_delete=models.CASCADE)
+    purchase_time = models.DateTimeField(default=timezone.now)
+    item_id = models.PositiveIntegerField()  # Reference to the specific item
+
+    def is_valid(self):
+        # Check if the purchase is still valid (within 24 hours)
+        return self.purchase_time + timezone.timedelta(hours=24) > timezone.now()

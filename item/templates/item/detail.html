@@ -45,8 +45,6 @@
 
 </style>
 
-<br><br>
-
 <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
     <div class="md:col-span-3 flex justify-center items-center"> <!-- Center horizontally and vertically -->
         <img src="{{ item.image.url }}" class="rounded-xl w-full">
@@ -133,6 +131,47 @@
 
         <!-- <a href="{% url 'dashboard:myprofile' item.created_by_id %}" class="btn btn-danger">View media</a> -->
         <!-- <a href="{% url 'dashboard:myprofile' %}" class="btn btn-primary">Go to My Uploads</a> -->
+        <!-- Your existing page content -->
+
+<!-- Button to trigger the paywall prompt -->
+<button id="showPaywallButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Unlock Content
+</button>
+
+<!-- Paywall Prompt Container -->
+<div id="paywallPrompt" class="fixed top-0 left-0 w-full h-full flex items-center justify-center hidden">
+    <div class="bg-white p-4 rounded shadow-lg">
+        <h2 class="text-lg font-semibold mb-2">Unlock Content</h2>
+        <p>Pay to unlock this content.</p>
+        
+        <!-- Example payment form -->
+        <form method="post" action="#">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                Pay Now
+            </button>
+        </form>
+        
+        <button id="closePaywallButton" class="text-gray-500 hover:text-gray-700 mt-2">Cancel</button>
+    </div>
+</div>
+
+<!-- JavaScript to show/hide the paywall prompt -->
+<script>
+    const showPaywallButton = document.getElementById('showPaywallButton');
+    const paywallPrompt = document.getElementById('paywallPrompt');
+    const closePaywallButton = document.getElementById('closePaywallButton');
+
+    showPaywallButton.addEventListener('click', () => {
+        paywallPrompt.classList.remove('hidden');
+    });
+
+    closePaywallButton.addEventListener('click', () => {
+        paywallPrompt.classList.add('hidden');
+    });
+</script>
+
 
     </div>
 </div>

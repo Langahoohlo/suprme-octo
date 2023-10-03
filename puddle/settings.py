@@ -11,12 +11,39 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+# from datetime import timedelta
 import os
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Replace with your broker URL
+# CELERY_BEAT_SCHEDULE = {
+#     'set_is_verified_task': {
+#         'task': 'your_app.tasks.set_is_verified_to_false',  # Replace with your actual task path
+#         'schedule': timedelta(minutes=1),  # Run every 1 minute or adjust as needed
+#     },
+# }
+
+# # Import statements for Redis configuration
+
+# # Redis URL for cache configuration
+# REDIS_URL = 'redis://localhost:6379/0'  # Replace with your Redis server URL
+
+# # Caches configuration
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': 'redis://localhost:6379/0',  # Replace with your Redis server URL
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#             'CONNECTION_POOL_KWARGS': {'decode_responses': True},
+#             'SOCKET_CONNECT_TIMEOUT': 5,  # Adjust as needed
+#             'SOCKET_TIMEOUT': 5,          # Adjust as needed
+#             'KEY_PREFIX': 'my_prefix:',   # Set your global key prefix here
+#         }
+#     }
+# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,7 +52,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j4ippt+3h39u4ontllpc8a(4h&^god(7aicz#@q^sl_(w)2otp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # settings.py
 
@@ -63,6 +90,7 @@ INSTALLED_APPS = [
     'item',
     'custom_filters_app',
     'pics_videos',
+    'sms_receiver'
 ]
 
 MIDDLEWARE = [
