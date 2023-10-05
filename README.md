@@ -1,7 +1,5 @@
 # Puddle | Django
 
-Learn how to build a simple online market place website using Django.
-
 This code is edited from the template Puddle made by code with Stein.
 
 The original tags of the code are left and not edited out if you want the original template.
