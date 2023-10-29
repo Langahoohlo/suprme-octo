@@ -5,31 +5,52 @@
 <head>
 
     <style>
-        /* Custom styles for dark mode */
+
+        :root {
+            
+            font-size: 15px;
+            
+            /* Primary */
+            --var-soft-blue: hsl(215, 51%, 70%);
+            --var-cyan: hsl(178, 100%, 50%);
+            /* Neutral */
+            --var-main-darkest: hsl(217, 54%, 11%);
+            --var-card-dark: hsl(216, 50%, 16%);
+            --var-line-dark: hsl(215, 32%, 27%);
+            --var-lightest: white;
+            
+            /* Fonts */
+            
+            --var-heading: normal normal 600 1.5em/1.6em 'Outfit', sans-serif;
+            
+            --var-small-heading: normal normal 400 1em/1em 'Outfit', sans-serif;
+            
+            --var-para: normal normal 300 1em/1.55em 'Outfit', sans-serif;
+        }
+
         body {
-            background-color: #1a202c;
+            background-color: var(--var-main-darkest);
         }
 
         .dark-mode {
-            background-color: #1a202c;
+            background-color: var(--var-main-darkest);
             color: #ff0000;
             /* Red font color */
         }
-
         /* Styles for navigation menu links */
         .dark-mode nav a {
-            color: #ff0000;
+            color:var(--var-cyan);
         }
 
         /* Styles for footer links */
         .dark-mode footer a {
-            color: #ff0000;
+            color: var(--var-cyan);
         }
 
         /* Additional styles for specific elements can be added as needed */
 
         .fixed-navbar {
-            position: fixed;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
@@ -74,7 +95,7 @@
 
             /* Styling for the bottom navigation bar */
             .bottom-navigation-bar {
-                background-color: #ffffff;
+                background-color: var(--var-lightest);
                 /* Background color */
                 border-radius: 20px;
                 /* Rounded edges */
@@ -86,7 +107,7 @@
                 padding: 10px;
                 /* Add padding to the buttons for spacing */
                 position: fixed;
-                bottom: 10px;
+                bottom: 5px;
                 /* Adjust the distance from the bottom as needed */
                 left: 50%;
                 /* Center horizontally */
@@ -117,7 +138,7 @@
 
         }
 
-        .logo {
+        /* .logo {
             font-family: Arial, sans-serif;
             font-size: 24px;
             font-weight: bold;
@@ -128,16 +149,16 @@
             background-clip: text;
             color: transparent;
             display: inline-block;
-            /* padding: 10px 20px;
-            border-radius: 10px; */
+            padding: 10px 20px;
+            border-radius: 10px; 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+         } /*
 
         /* Add some additional styling for the logo container if needed */
-        .logo-container {
+        /* .logo-container {
             text-align: center;
-            margin-top: 5px;
-        }
+            margin-top: 0px;
+        } */
     </style>
 
     <meta charset="utf-8">
@@ -266,7 +287,7 @@
         {% endblock %}
     </div>
 
-    <footer class="py-6 px-6 flex justify-between bg-gray-800">
+    <footer class="py-6 px-6 flex justify-between bg-gray-800" style="margin-bottom: 75px;">
         <div class="w-2/3 pr-10">
             <h3 class="mb-5 font-semibold text-gray-400">About</h3>
 
